@@ -1,6 +1,6 @@
 const firePixelsArray = [];
-const fireWidth = 60;
-const fireHeight = 40;
+const fireWidth = 80;
+const fireHeight = 50;
 const fireColorsPalette = [
   { r: 7, g: 7, b: 7 },
   { r: 31, g: 7, b: 7 },
@@ -88,11 +88,11 @@ function updateFireIntensityPerPixel(currentPixelindex) {
     return;
   }
 
-  const decay = 1;
+  const decay = Math.floor(Math.random() * 3);
   const belowPixelFireIntensity = firePixelsArray[belowPixelIndex];
   const newFireIntensity = belowPixelFireIntensity - decay >= 0 ? belowPixelFireIntensity - decay : 0;
 
-  firePixelsArray[currentPixelindex] = newFireIntensity;
+  firePixelsArray[currentPixelindex - decay] = newFireIntensity;
 }
 
 function calculateFirePropagation() {
@@ -120,7 +120,7 @@ function start() {
   createFireSource();
   renderFire();
 
-  setInterval(calculateFirePropagation, 10);
+  setInterval(calculateFirePropagation, 5);
 }
 
 start();
